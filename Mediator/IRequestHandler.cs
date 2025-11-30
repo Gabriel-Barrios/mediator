@@ -1,6 +1,11 @@
-﻿namespace Mediator;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
-public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
+namespace Mediator;
+
+public interface IRequestHandler<in TRequest, TResponse> 
+    where TRequest : IRequest<TResponse>
+    where TResponse : Response
 {
     Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 }
